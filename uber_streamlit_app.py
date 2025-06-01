@@ -64,7 +64,7 @@ unique_values = {col: dataset[col].nunique() for col in object_cols}
 print("Unique categorical values:\n", unique_values)
 
 # Countplots
-plt.figure(figsize=(10, 5))
+plt.figure(figsize=(6, 3))
 plt.subplot(1, 2, 1)
 sns.countplot(x='CATEGORY', data=dataset)
 plt.xticks(rotation=90)
@@ -79,7 +79,7 @@ sns.countplot(x='day-night', data=dataset)
 plt.xticks(rotation=90)
 plt.savefig("day_night.png")
 
-plt.figure(figsize=(15, 5))
+plt.figure(figsize=(6, 3))
 sns.countplot(data=dataset, x='PURPOSE', hue='CATEGORY')
 plt.xticks(rotation=90)
 plt.tight_layout()
@@ -93,7 +93,7 @@ OH_cols.columns = OH_encoder.get_feature_names_out()
 dataset = pd.concat([dataset.drop(object_cols, axis=1), OH_cols], axis=1)
 
 # Correlation heatmap
-plt.figure(figsize=(12, 8))
+plt.figure(figsize=(6, 3))
 sns.heatmap(dataset.select_dtypes(include='number').corr(), cmap='BrBG', annot=True, fmt='.2f')
 plt.tight_layout()
 plt.savefig("correlation.png")
@@ -144,7 +144,7 @@ if st.button("▶️ Run Analysis"):
     st.subheader("📊 Category and Purpose Distribution")
     st.markdown("This chart shows the number of rides by *Category* (Business/Personal) and by *Purpose* (e.g., Meeting, Meals, etc).")
 
-    fig1, ax1 = plt.subplots(1, 2, figsize=(10, 4))
+    fig1, ax1 = plt.subplots(1, 2, figsize=(6, 3))
     sns.countplot(data=df, x='CATEGORY', ax=ax1[0])
     ax1[0].set_title("Ride Category")
     sns.countplot(data=df, x='PURPOSE', ax=ax1[1])
@@ -164,7 +164,7 @@ if st.button("▶️ Run Analysis"):
     # 3. Purpose vs Category
     st.subheader("📌 Purpose vs Category")
     st.markdown("This shows how ride purposes vary across business and personal categories.")
-    fig3, ax3 = plt.subplots(figsize=(10, 4))
+    fig3, ax3 = plt.subplots(figsize=(6, 3))
     sns.countplot(data=df, x='PURPOSE', hue='CATEGORY', ax=ax3)
     ax3.set_title("Purpose Breakdown by Category")
     ax3.tick_params(axis='x', rotation=90)
@@ -181,7 +181,7 @@ if st.button("▶️ Run Analysis"):
     monthly_counts = df['MONTH'].value_counts().sort_index()
     monthly_max_miles = df.groupby('MONTH')['MILES'].max()
 
-    fig4, ax4 = plt.subplots(figsize=(8, 4))
+    fig4, ax4 = plt.subplots(figsize=(6, 3))
     sns.lineplot(x=monthly_counts.index, y=monthly_max_miles.values, marker="o", ax=ax4)
     ax4.set_xlabel("Month")
     ax4.set_ylabel("Max Miles")
