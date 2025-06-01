@@ -64,7 +64,7 @@ unique_values = {col: dataset[col].nunique() for col in object_cols}
 print("Unique categorical values:\n", unique_values)
 
 # Countplots
-plt.figure(figsize=(6, 3))
+plt.figure(figsize=(10, 4))
 plt.subplot(1, 2, 1)
 sns.countplot(x='CATEGORY', data=dataset)
 plt.xticks(rotation=90)
@@ -79,7 +79,7 @@ sns.countplot(x='day-night', data=dataset)
 plt.xticks(rotation=90)
 plt.savefig("day_night.png")
 
-plt.figure(figsize=(6, 3))
+plt.figure(figsize=(10, 4))
 sns.countplot(data=dataset, x='PURPOSE', hue='CATEGORY')
 plt.xticks(rotation=90)
 plt.tight_layout()
@@ -144,7 +144,7 @@ if st.button("▶️ Run Analysis"):
     st.subheader("📊 Category and Purpose Distribution")
     st.markdown("This chart shows the number of rides by *Category* (Business/Personal) and by *Purpose* (e.g., Meeting, Meals, etc).")
 
-    fig1, ax1 = plt.subplots(1, 2, figsize=(6, 3))
+    fig1, ax1 = plt.subplots(1, 2, figsize=(10, 4))
     sns.countplot(data=df, x='CATEGORY', ax=ax1[0])
     ax1[0].set_title("Ride Category")
     sns.countplot(data=df, x='PURPOSE', ax=ax1[1])
@@ -164,7 +164,7 @@ if st.button("▶️ Run Analysis"):
     # 3. Purpose vs Category
     st.subheader("📌 Purpose vs Category")
     st.markdown("This shows how ride purposes vary across business and personal categories.")
-    fig3, ax3 = plt.subplots(figsize=(6, 3))
+    fig3, ax3 = plt.subplots(figsize=(10, 4))
     sns.countplot(data=df, x='PURPOSE', hue='CATEGORY', ax=ax3)
     ax3.set_title("Purpose Breakdown by Category")
     ax3.tick_params(axis='x', rotation=90)
