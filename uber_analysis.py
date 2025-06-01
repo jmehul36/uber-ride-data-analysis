@@ -39,7 +39,7 @@ unique_values = {col: dataset[col].nunique() for col in object_cols}
 print("Unique categorical values:\n", unique_values)
 
 # Countplots
-plt.figure(figsize=(10, 5))
+plt.figure(figsize=(6, 3))
 plt.subplot(1, 2, 1)
 sns.countplot(x='CATEGORY', data=dataset)
 plt.xticks(rotation=90)
@@ -54,7 +54,7 @@ sns.countplot(x='day-night', data=dataset)
 plt.xticks(rotation=90)
 plt.savefig("day_night.png")
 
-plt.figure(figsize=(15, 5))
+plt.figure(figsize=(6, 3))
 sns.countplot(data=dataset, x='PURPOSE', hue='CATEGORY')
 plt.xticks(rotation=90)
 plt.tight_layout()
@@ -68,7 +68,7 @@ OH_cols.columns = OH_encoder.get_feature_names_out()
 dataset = pd.concat([dataset.drop(object_cols, axis=1), OH_cols], axis=1)
 
 # Correlation heatmap
-plt.figure(figsize=(12, 8))
+plt.figure(figsize=(6, 3))
 sns.heatmap(dataset.select_dtypes(include='number').corr(), cmap='BrBG', annot=True, fmt='.2f')
 plt.tight_layout()
 plt.savefig("correlation.png")
