@@ -1,5 +1,3 @@
-# uber_streamlit_app.py
-
 import streamlit as st
 import pandas as pd
 import seaborn as sns
@@ -38,7 +36,7 @@ if st.button("▶️ Run Analysis"):
     st.subheader("📊 Category and Purpose Distribution")
     st.markdown("This chart shows the number of rides by *Category* (Business/Personal) and by *Purpose* (e.g., Meeting, Meals, etc).")
 
-    fig1, ax1 = plt.subplots(1, 2, figsize=(12, 4))
+    fig1, ax1 = plt.subplots(1, 2, figsize=(14, 5))
     sns.countplot(data=df, x='CATEGORY', ax=ax1[0])
     ax1[0].set_title("Ride Category")
     sns.countplot(data=df, x='PURPOSE', ax=ax1[1])
@@ -51,14 +49,14 @@ if st.button("▶️ Run Analysis"):
     # 2. Time of Day
     st.subheader("🕒 Time of Day Distribution")
     st.markdown("This shows how rides are distributed throughout the day—morning, afternoon, evening, and night.")
-    fig2, ax2 = plt.subplots(figsize=(6,3))
+    fig2, ax2 = plt.subplots()
     sns.countplot(data=df, x='day-night', ax=ax2)
     st.pyplot(fig2)
 
     # 3. Purpose vs Category
     st.subheader("📌 Purpose vs Category")
     st.markdown("This shows how ride purposes vary across business and personal categories.")
-    fig3, ax3 = plt.subplots(figsize=(10, 4))
+    fig3, ax3 = plt.subplots(figsize=(12, 5))
     sns.countplot(data=df, x='PURPOSE', hue='CATEGORY', ax=ax3)
     ax3.set_title("Purpose Breakdown by Category")
     ax3.tick_params(axis='x', rotation=90)
@@ -75,7 +73,7 @@ if st.button("▶️ Run Analysis"):
     monthly_counts = df['MONTH'].value_counts().sort_index()
     monthly_max_miles = df.groupby('MONTH')['MILES'].max()
 
-    fig4, ax4 = plt.subplots(figsize=(6, 3))
+    fig4, ax4 = plt.subplots()
     sns.lineplot(x=monthly_counts.index, y=monthly_max_miles.values, marker="o", ax=ax4)
     ax4.set_xlabel("Month")
     ax4.set_ylabel("Max Miles")
@@ -87,10 +85,8 @@ if st.button("▶️ Run Analysis"):
     df['DAY'] = df['START_DATE'].dt.weekday.map({
         0: 'Mon', 1: 'Tues', 2: 'Wed', 3: 'Thurs', 4: 'Fri', 5: 'Sat', 6: 'Sun'
     })
-    day_counts = df['DAY'].value_counts().reindex(['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'])
-
-    fig5, ax5 = plt.subplots(figsize=(7,3))
-    sns.barplot(x=day_counts.index, y=day_counts.values, ax=ax5)
+    fig5, ax5 = plt.subplots()
+    sns.barplot(x=df['DAY'].value_counts().index, y=df['DAY'].value_counts().values, ax=ax5)
     ax5.set_ylabel("Ride Count")
     st.pyplot(fig5)
 
@@ -98,23 +94,15 @@ if st.button("▶️ Run Analysis"):
     st.subheader("📐 Ride Distance Analysis")
     st.markdown("Boxplot and distribution of miles. Useful to detect outliers or common trip distances.")
     
-    fig6, ax6 = plt.subplots(figsize=(6, 3))
+    fig6, ax6 = plt.subplots()
     sns.boxplot(x=df['MILES'], ax=ax6)
     ax6.set_title("Boxplot of Miles")
     st.pyplot(fig6)
 
-    fig7, ax7 = plt.subplots(figsize=(6, 3))
+    fig7, ax7 = plt.subplots()
     sns.histplot(df[df['MILES'] < 40]['MILES'], kde=True, ax=ax7)
     ax7.set_title("Distribution of Rides < 40 Miles")
     st.pyplot(fig7)
-
-    # 7. Correlation Heatmap
-    st.subheader("🧮 Correlation Heatmap")
-    st.markdown("Correlation matrix of numerical features in the dataset.")
-    numeric_dataset = df.select_dtypes(include=['number'])
-    fig8, ax8 = plt.subplots(figsize=(7, 5))
-    sns.heatmap(numeric_dataset.corr(), cmap='BrBG', annot=True, fmt=".2f", linewidths=1, ax=ax8)
-    st.pyplot(fig8)
 
 # Footer
 st.markdown("---")
