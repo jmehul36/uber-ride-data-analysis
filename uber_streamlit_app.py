@@ -134,7 +134,7 @@ plt.savefig("miles_under_100_boxplot.png")
 
 sns.histplot(dataset[dataset['MILES'] < 40]['MILES'], kde=True)
 plt.savefig("miles_under_40_distplot.png")'''
-        st.code(full_code, language='python')
+    st.code(full_code, language='python')
 
 # Run button
 if st.button("▶️ Run Analysis"):
