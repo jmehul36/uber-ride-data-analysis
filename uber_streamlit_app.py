@@ -23,10 +23,8 @@ def load_data():
 
 # Show code section
 with st.expander("📜 Show Data Processing Code"):
-    with open(__file__, "r") as f:
-        code_lines = f.readlines()
-        selected_code = ''.join(code_lines[10:75])  # Adjust line range if needed
-        st.code(selected_code, language='python')
+    full_code = '''
+        st.code(full_code, language='python')
 
 # Run button
 if st.button("▶️ Run Analysis"):
