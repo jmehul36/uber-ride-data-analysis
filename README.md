@@ -39,3 +39,5 @@ The main goal of this project is to:
 - What are the most common ride purposes?
 
 ---
+
+**Deployed the app on **[Streamlit Cloud](https://uber-ride-data-analysis-s4shhf46c4hezcxqrj85uf.streamlit.app/)****
